@@ -15,9 +15,24 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Lib
+  exposed-modules:     Network.Marathon
+                     , Network.Marathon.V2.Apps
+                     , Network.Marathon.V2.Artifacts
+                     , Network.Marathon.V2.Deployments
+                     , Network.Marathon.V2.Events
+                     , Network.Marathon.V2.EventsSub
+                     , Network.Marathon.V2.Groups
+                     , Network.Marathon.V2.Info
+                     , Network.Marathon.V2.Leader
+                     , Network.Marathon.V2.Queue
+                     , Network.Marathon.V2.Tasks
   build-depends:       base >= 4.7 && < 5
+                     , aeson
+                     , unordered-containers
+                     , either
+                     , servant
                      , servant-client
+                     , text
   default-language:    Haskell2010
 
 executable marathon-hs-exe

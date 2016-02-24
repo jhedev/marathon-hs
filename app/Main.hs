@@ -1,6 +1,6 @@
 module Main where
 
-import Lib
+import Network.Marathon
 
 main :: IO ()
-main = someFunc
+main = putStrLn "Hello"
