@@ -1,11 +1,8 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE OverloadedStrings #-}
 module Network.Marathon.V2.Deployments where
 
 import Data.Aeson
 import Data.Text (Text)
-import Servant.API
 
 -- Deployments API
 
@@ -52,6 +49,3 @@ newtype Deployments = Deployments [Deployment]
 
 instance FromJSON Deployments where
   parseJSON v = parseJSON v >>= return . Deployments
-
-type Api = Get '[JSON] Deployments
-      :<|> Capture "deployment_id" DeploymentId :> Delete '[JSON] Text

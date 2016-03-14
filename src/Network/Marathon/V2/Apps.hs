@@ -1,5 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE OverloadedStrings #-}
 module Network.Marathon.V2.Apps where
 
@@ -7,7 +5,6 @@ import Control.Monad (mzero)
 import Data.Aeson
 import qualified Data.HashMap.Strict as HMap
 import Data.Text (Text)
-import Servant.API
 
 newtype AppId = AppId Text deriving (Show, Read, Eq)
 
@@ -249,22 +246,3 @@ data Embed = EmbedTasks
            | EmbedLastTaskFailure
            | EmbedTaskStats
           deriving (Show, Read, Eq)
-
--- Action on all apps
-type AllApps = Post '[JSON] App -- Create a new app
-   :<|> QueryParam "id" IdFilter :> QueryParam "label" LabelSelector :>
-        QueryParam "cmd" CmdFilter :> Get '[JSON] Apps -- Get all apps
-
--- Actions with app id
-type AppById = Get '[JSON] App
-   :<|> "versions" :> Capture "version" Text :> Get '[JSON] App
-   :<|> Put '[JSON] App
-   :<|> Post '[] () -- TODO: Get back json object with deployment id and version
-   :<|> Delete '[] () -- TODO: same as above
-   :<|> "tasks" :> TaskApi
-
-type TaskApi = Get '[JSON] [Task]
-   :<|> QueryParam "host" Text :> QueryParam "scale" Bool :> Delete '[] [Task]
-   :<|> Capture "taskId" Text :> QueryParam "scale" Bool :> Delete '[] Task
-
-type Api = QueryParams "embed" Embed :> (AllApps :<|> Capture "appId" Text :> AppById)
