@@ -3,16 +3,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Network.Marathon ( marathonApi
                         , MarathonApi
-                        , module Apps
-                        , module Deployments
-                        , module Groups
-                        , module Tasks
-                        , module Artifacts
-                        , module Events
-                        , module EventsSub
-                        , module Info
-                        , module Leader
-                        , module Queue
                         ) where
 
 import Data.Proxy (Proxy(..))
